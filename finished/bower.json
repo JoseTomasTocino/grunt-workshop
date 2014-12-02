@@ -1,0 +1,15 @@
+{
+  "name": "taller_grunt",
+  "version": "1.0.0",
+  "description": "Pruebas para el taller de Grunt",
+  "dependencies": {
+    "jquery" : "latest",
+    "normalize.css": "latest"
+  },
+  "install" : {
+    "path" : {
+      "js": "js/vendor",
+      "css": "css/vendor"
+    }
+  }
+}
