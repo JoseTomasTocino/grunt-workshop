@@ -44,8 +44,20 @@ module.exports = function(grunt) {
 
         watch:
         {
-            files: ["index.html", "assets-src/**/*"],
-            tasks: ['concat', 'uglify'],
+            html: {
+                files: ["index.html"]
+            },
+
+            js: {
+                files: ["assets-src/js/**/*"],
+                tasks: ["concat:js", "uglify"]
+            },
+
+            css: {
+                files: ["assets-src/css/**/*"],
+                tasks: ["concat:css"]
+            },
+
             options: {
                 spawn: false,
                 livereload: true,

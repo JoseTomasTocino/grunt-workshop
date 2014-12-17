@@ -330,39 +330,73 @@ uglify:
 },
 ```
 
-## Paso 8: subtareas
+## Paso 8: objetivos (_targets_)
 
-Por cada plugin es posible configurar diferentes bloques de configuración según nuestras necesidades. Por ejemplo, supongamos que estamos editando código CSS y código JavaScript, y que:
+Por cada plugin es posible configurar diferentes **bloques de configuración** según nuestras necesidades, conocidos como **objetivos** o **targets**. Por ejemplo, supongamos que estamos editando código CSS y código JavaScript, y queremos lo siguiente:
 
-* Cada vez que editemos el JavaScript, se concatene y minifique (con `uglify`) y se actualice el navegador.
-* Cada vez que editemos el CSS, se concatene y se actualice el navegador.
+* Cada vez que editemos el JavaScript, que se concatene y minifique (con `uglify`) y se actualice el navegador.
+* Cada vez que editemos el CSS, que se concatene y se actualice el navegador.
+* Cada vez que editemos el HTML, simplemente actualizar el navegador.
 
-En ambos casos utilizaremos el plugin `concat`, pero hasta ahora solo lo hemos configurado para concatenar ficheros JavaScript. Para que haga lo propio con ficheros CSS, haremos uso de sub
+En los dos primeros casos utilizaremos el plugin `concat`, pero hasta ahora solo lo hemos configurado para concatenar ficheros JavaScript. Para que haga lo propio con ficheros CSS, haremos uso de los targets. Crearemos uno para los ficheros CSS y otro para los ficheros JS. El bloque de configuración del plugin `concat` quedará así:
 
-watch: {
-  scripts: {
-    files: ['*.js', 'src/**.js'],
-    tasks: ['jshint:all', 'copy:scripts'],
-    options: {
-      livereload: true
+```javascript
+concat:
+{
+    js:
+    {
+        src: ["assets-src/js/vendor/**/*", "assets-src/js/source/*"],
+        dest: "assets/js/script.js"
+    },
+
+    css:
+    {
+        src: ["assets-src/css/**/*"],
+        dest: "assets/css/style.css"
     }
-  },
-  compass: {
-    files: ['src/styles/**'],
-    tasks: ['compass:dev'],
+},
+```
+
+Ahora, si queremos concatenar los ficheros JavaScript desde la línea de comandos, podremos lanzar la acción con
+
+```bash
+grunt concat:js
+```
+
+Y para hacer lo propio con los ficheros CSS:
+
+```bash
+grunt concat:css
+```
+
+O ejecutar todos los _targets_ de una tarea:
+
+```bash
+grunt concat
+```
+
+Ahora bien, como decíamos, necesitamos integrar el plugin `watch` con esta nueva configuración. De nuevo, haremos uso de los _targets_, quedando la configuración de `watch` así:
+
+```javascript
+watch:
+{
+    html: {
+        files: ["index.html"]
+    },
+
+    js: {
+        files: ["assets-src/js/**/*"],
+        tasks: ["concat:js", "uglify"]
+    },
+
+    css: {
+        files: ["assets-src/css/**/*"],
+        tasks: ["concat:css"]
+    },
+
     options: {
-      livereload: true
+        spawn: false,
+        livereload: true,
     }
-  },
-  handlebars: {
-    files: ['src/templates/**'],
-    tasks: ['handlebars:dev'],
-    options: {
-      livereload: true
-    }
-  },
-  jasmine: {
-    files: ['test/spec/**'],
-    tasks: ['jshint:all', 'jasmine:all']
-  }
 }
+```
