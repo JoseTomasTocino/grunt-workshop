@@ -1,5 +1,20 @@
-* { font-family: sans-serif; }
-h1 { color: red; }
+@import url(http://fonts.googleapis.com/css?family=Courgette|Roboto:300,300italic);
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Courgette', cursive;
+    font-weight: normal;
+}
+#container {
+    width: 900px;
+    margin: 0 auto;
+    padding: 10px 20px;
+}
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
 
 
 /*! normalize.css v3.0.2 | MIT License | git.io/normalize */

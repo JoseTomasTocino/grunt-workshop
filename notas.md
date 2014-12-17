@@ -400,3 +400,24 @@ watch:
     }
 }
 ```
+
+Así, podremos al lanzar `grunt watch` desde la terminal, automáticamente se ejecutarán las operaciones indicadas según el fichero que se modifique, actualizándose también el navegador.
+
+# Otros plugins de Grunt
+
+## Preprocesado de CSS con Sass y Compass
+
+[Sass ](http://sass-lang.com) es un preprocesador de CSS muy potente, que nos permite escribir hojas de estilos de manera sencilla que luego se convierten en código CSS multiplataforma. A su vez, [Compass](http://compass-style.org/) es un framework de desarrollo CSS que utiliza Sass y que ofrece una gran cantidad de utilidades para facilitarnos el desarrollo de CSS en forma de _mixins_ y funciones de todo tipo.
+
+El plugin `grunt-contrib-compass` facilita el procesado de ficheros escritos con Sass/Compass directamente desde Grunt.
+
+## Minificación de CSS
+
+Con `cssmin` (se instala con `npm install grunt-contrib-cssmin --save-dev`) podemos minificar nuestro CSS para que ocupe el mínimo tamaño posible.
+
+## Validación de ficheros JavaScript
+
+Con `jshint` (se instala con `npm install grunt-contrib-jshint --save-dev`) podemos verificar nuestros ficheros JavaScript para comprobar que siguen buenas prácticas de programación y otras verificaciones.
+
+
+
