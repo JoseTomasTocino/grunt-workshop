@@ -1,18 +1,32 @@
 # Introducción
 
-Grunt es un lanzador de tareas automáticas que nos facilitará las cosas a la hora de hacer labores repetitivas durante el desarrollo web front-end, como reducir código, generar css, combinar ficheros e incluso actualizar el navegador. 
+Grunt es un **lanzador de tareas** automáticas que nos facilitará las cosas a la hora de hacer labores repetitivas durante el desarrollo web front-end, como reducir código, generar css, combinar ficheros e incluso actualizar el navegador. 
 
-Grunt cuenta con una estructura **basada en plugins** muy especializados, con la idea de que combinando esos plugins se lleven a cabo tareas más complejas. Existen cerca de 4000 plugins para Grunt y la lista va aumentando diariamente.
+Grunt cuenta con una estructura **basada en plugins** muy especializados, con la idea de que combinando esos plugins se lleven a cabo tareas más complejas. Existen cerca de 4000 plugins para Grunt y la lista va aumentando diariamente. Puedes encontrar la [lista de plugins aquí](http://gruntjs.com/plugins).
 
 En este taller vamos a presentar Grunt, veremos cómo se instala, cómo se configura y cómo se usa.
 
-# Instalación
+# Requisitos previos de instalación
 
-## Requisitos previos
-* Node.js
+Grunt está implementado en JavaScript, utilizando [Node.js](http://nodejs.org/) como entorno para ejecutarse. Por tanto, es imprescindible que esté instalado. La forma más sencilla de instalar Node en un sistema como Ubuntu es con los siguientes comandos:
 
-## Primer paso: crear package.json
-Lo primero que debemos hacer es crear un fichero llamado `package.json`. Este fichero contiene información sobre vuestro proyecto, como el nombre, la versión, información sobre el desarrollador y la lista de dependencias, que se descargarán de el repositorio de `npm`.
+    curl -sL https://deb.nodesource.com/setup | sudo bash -
+    sudo apt-get install nodejs
+
+
+Con esto ya tendremos disponibles tanto `node` como [npm](https://www.npmjs.com/), el gestor de paquetes de Node.
+
+# Proyecto de ejemplo
+
+Para ir aprendiendo a usar Grunt, vamos a aplicarlo a un proyecto de ejemplo. El ejemplo tiene la siguiente estructura:
+
+- Un fichero web `index.html` con contenido de prueba.
+- Una carpeta `assets-src`, donde se encuentra el código fuente de los ficheros JavaScript y CSS originales.
+- Una carpeta `assets`, donde se se ubicarán los ficheros generados a partir de los originales.
+
+## Paso 1: creación de package.json
+
+Al comenzar cualquier proyecto lo primero que debemos hacer es crear un fichero llamado `package.json` ([más información sobre el fichero package.json](http://browsenpm.org/package.json)). Este fichero contiene información sobre vuestro proyecto, como el nombre, la versión, información sobre el desarrollador y la lista de dependencias, que se descargarán del repositorio de `npm`.
 
 Para empezar a crearlo, escribe:
 
@@ -22,26 +36,29 @@ Rellena los campos que te pide, puedes dejar la mayoría en blanco porque no son
 
     npm help json
 
-## Segundo paso: instalar Grunt
+## Paso 2: instalando Grunt
+
 **Grunt** se instala en dos partes. En primer lugar, es necesario instalar el cliente de Grunt, utilizando
 
     sudo npm install -g grunt-cli
 
-Esto nos habilitará un comando `grunt` con el que trabajar. Seguidamente, necesitamos instalar Grunt de forma local en nuestro proyecto, escribiendo lo siguiente:
+Esto nos habilitará un comando global `grunt` con el que trabajar. Seguidamente, necesitamos instalar Grunt de forma local en nuestro proyecto, escribiendo lo siguiente:
 
     npm install grunt --save-dev
 
 Esto, además, actualizará el fichero `package.json` añadiendo Grunt como dependencia de desarrollo.
 
-## Tercer paso: crear fichero Gruntfile
+## Paso 3: creación del fichero Gruntfile.js
+
 Las operaciones que Grunt ejecuta se deben definir en un fichero llamado `Gruntfile.js`, que tiene una estructura bien definida:
 
-    module.exports = function(grunt) {
-    
+    module.exports = function(grunt) 
+    {    
         // 1. Bloque de configuración
         grunt.initConfig(
         {
-            concat: {
+            concat: 
+            {
                 // Configuración particular de cada plugin
             }    
         });
@@ -58,7 +75,7 @@ Su estructura es muy sencilla. El primer paso siempre será decidir **qué plugi
 
     grunt.loadNpmTasks('grunt-contrib-concat');
 
-El segundo paso será definir las **opciones de configuración** de cada plugin dentro del blog que `grunt.initConfig`. Por regla general, indicaremos unos ficheros de entrada y una salida, y opcionalmente algunos parámetros dependientes de cada plugin.
+El segundo paso será definir las **opciones de configuración** de cada plugin dentro del bloque `grunt.initConfig`. Por regla general, indicaremos unos ficheros de entrada y una salida, y opcionalmente algunos parámetros dependientes de cada plugin.
 
     grunt.initConfig(
     {
@@ -78,13 +95,7 @@ Cuando está todo configurado, indicamos la tarea a ejecutar usando
 
 Hay un caso especial, el de la tarea por defecto, denominada *default*, que se ejecuta cuando lanzamos `grunt` sin argumentos.
 
-# Proyecto de ejemplo
-
-Para ir aprendiendo a usar Grunt, vamos a aplicarlo a un proyecto de ejemplo. Podéis descargar el código fuente base en ...
-
-
-
-## Paso 1, operación básica
+## Paso 4: operaciones básicas
 
 Si nos vamos a la carpeta `js/source` veréis que tenemos dos ficheros JavaScript: `function.js` y `main.js`. El primero de ellos define varias funciones de utilidad, mientras que el segundo las utiliza. Además, en la carpeta `js/vendor` está la popular biblioteca **jQuery**. Sería interesante poder usar esos tres ficheros sin tener que cargarlos uno a uno en el HTML. Por ello, resultaría interesante **concatenarlos** en un solo archivo `script.js` en la carpeta `js/output`, tarea que podemos hacer utilizando el plugin **concat** de Grunt. Para instalarlo, escribimos:
 
@@ -131,7 +142,7 @@ Obtendremos el siguiente resultado:
 
 Se habrá generado el fichero `js/output/script.js`. 
 
-## Paso 2, operaciones encadenadas
+## Paso 5: operaciones encadenadas
 
 Si os fijáis en el fichero generado, veréis que es bastante extenso. Puede resultar interesante reducir el tamaño del fichero, borrando saltos de línea innecesarios y minimizando el código. Para ello, podemos usar el plugin `uglify`. Para usarlo, seguimos los mismos pasos que antes, primero lo instalamos con npm:
 
@@ -158,7 +169,7 @@ Por último, añadimos este paso adicional a la tarea por defecto:
 
 ¡Listo!
 
-### Paso 2.1, opciones para los plugins
+### Paso 5.1: opciones para los plugins
 
 Cada uno de los plugins de Grunt cuenta con opciones para modificar su comportamiento de varias maneras. Por ejemplo, supongamos que queremos que `uglify` no borre los comentarios del código. Existe una opción, **preserveComments** que nos permitirá hacer eso mismo. Las opciones de los plugins se ubican en un bloque `options` dentro del bloque de configuración de cada plugin. Por ejemplo:
 
@@ -178,7 +189,7 @@ Cada uno de los plugins de Grunt cuenta con opciones para modificar su comportam
 
 Es posible ver todas las opciones de cada plugin en la página oficial de npm (npmjs.org).
 
-# Paso 3, Watch
+## Paso 6: vigilancia de ficheros con `watch`
 
 Hasta ahora, hemos visto operaciones que lanzamos manualmente desde la terminal, pero puede resultar interesante que se ejecuten de forma automática, por ejemplo, cuando se modifica un fichero. Para ello tenemos el plugin `watch`, que hace exactamente eso. Primero, lo instalamos con:
 
@@ -222,7 +233,7 @@ Lo que hemos comentado hasta ahora está muy bien, pero... ¿y si pudiésemos ir
 
 Ahora, en nuestro navegador, instalamos la extensión LiveReload (http://feedback.livereload.com/knowledgebase/articles/86242-how-do-i-install-and-use-the-browser-extensions-). Lanzamos grunt (con `grunt watch`) y pulsamos en el navegador el botón que aparecerá en la barra. Ahora, al actualizar cualquier fichero se actualizará el navegador automáticamente.
 
-## Paso 3.1, servidor local
+### Paso 6.1: servidor local
 
 Por **limitaciones de seguridad**, no es posible utilizar LiveReload con ficheros locales (los que tienen una URL que empieza por `file://`). Si no estáis usando Apache ni Nginx, es posible probar esto usando un pequeño servidor de Python. Simplemente en la carpeta en la que estéis, escribid:
 
@@ -230,7 +241,7 @@ Por **limitaciones de seguridad**, no es posible utilizar LiveReload con fichero
 
 Y podréis acceder a la web desde la url `http://0.0.0.0:8000`
 
-# Paso 4, reutilizando variables
+## Paso 7: reutilizando variables
 
 Para evitar repetir bloques similares, es posible utilizar variables e información dentro de Grunt. Por ejemplo, ¿recordáis el fichero `package.json` que se creó al principio? Es posible usar las cadenas de texto de ese fichero. Para ello, simplemente añadimos la siguiente línea al bloque de configuración:
 
@@ -271,3 +282,46 @@ Una vez definida podemos, por ejemplo, hacer que aparezca este mensaje en la cab
             banner: "<%= message %>"
         },
 
+        files:
+        {
+            src: "js/output/script.js",
+            dest: "js/output/script.min.js"
+        }
+    },
+
+## Paso 8: subtareas
+
+Por cada plugin es posible configurar diferentes bloques de configuración según nuestras necesidades. Por ejemplo, supongamos que estamos editando código CSS y código JavaScript, y que:
+
+* Cada vez que editemos el JavaScript, se concatene y minifique (con `uglify`) y se actualice el navegador.
+* Cada vez que editemos el CSS, se concatene y se actualice el navegador.
+
+En ambos casos utilizaremos el plugin `concat`, pero hasta ahora solo lo hemos configurado para concatenar ficheros JavaScript. Para que haga lo propio con ficheros CSS, haremos uso de sub
+
+watch: {
+  scripts: {
+    files: ['*.js', 'src/**.js'],
+    tasks: ['jshint:all', 'copy:scripts'],
+    options: {
+      livereload: true
+    }
+  },
+  compass: {
+    files: ['src/styles/**'],
+    tasks: ['compass:dev'],
+    options: {
+      livereload: true
+    }
+  },
+  handlebars: {
+    files: ['src/templates/**'],
+    tasks: ['handlebars:dev'],
+    options: {
+      livereload: true
+    }
+  },
+  jasmine: {
+    files: ['test/spec/**'],
+    tasks: ['jshint:all', 'jasmine:all']
+  }
+}

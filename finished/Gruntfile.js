@@ -10,11 +10,22 @@ module.exports = function(grunt) {
 
         concat:
         {
-            files:
+            js:
             {
-                src: ["js/vendor/**/*", "js/source/*"],
-                dest: "js/output/script.js"
+                src: ["assets-src/js/vendor/**/*", "assets-src/js/source/*"],
+                dest: "assets/js/script.js"
+            },
+
+            css:
+            {
+                src: ["assets-src/css/**/*"],
+                dest: "assets/css/style.css"
             }
+        },
+
+        cssmin:
+        {
+
         },
 
         uglify:
@@ -26,14 +37,14 @@ module.exports = function(grunt) {
 
             files:
             {
-                src: "js/output/script.js",
-                dest: "js/output/script.min.js"
+                src: "assets/js/script.js",
+                dest: "assets/js/script.min.js"
             }
         },
 
         watch:
         {
-            files: ["index.html", "js/source/*", "css/**/*"],
+            files: ["index.html", "assets-src/**/*"],
             tasks: ['concat', 'uglify'],
             options: {
                 spawn: false,
@@ -47,6 +58,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
 
     // 3. Bloque de tareas
     grunt.registerTask('default', ['concat', 'uglify']);
