@@ -23,11 +23,6 @@ module.exports = function(grunt) {
             }
         },
 
-        cssmin:
-        {
-
-        },
-
         uglify:
         {
             options:
