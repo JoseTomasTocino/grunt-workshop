@@ -125,8 +125,8 @@ module.exports = function(grunt)
         {
             files:
             {
-                src: ["js/vendor/**/*", "js/source/*"],
-                dest: "js/output/script.js"
+                src:  "assets-src/js/**/*",
+                dest: "assets/js/script.js"
             }
         }   
     });
@@ -148,12 +148,12 @@ Obtendremos el siguiente resultado:
 ```bash
 $ grunt
 Running "concat:files" (concat) task
-File js/output/script.js created.
+File assets/js/script.js created.
 
 Done, without errors.
 ```
 
-Se habrá generado el fichero `js/output/script.js`. 
+Se habrá generado el fichero `assets/js/script.js`. 
 
 ## Paso 5: operaciones encadenadas
 
@@ -176,8 +176,8 @@ uglify:
 {
     files:
     {
-        src: "js/output/script.js",
-        dest: "js/output/script.min.js"
+        src:  "assets/js/script.js",
+        dest: "assets/js/script.min.js"
     }
 }
 ```
@@ -204,8 +204,8 @@ uglify:
 
     files:
     {
-        src: "js/output/script.js",
-        dest: "js/output/script.min.js"
+        src:  "assets/js/script.js",
+        dest: "assets/js/script.min.js"
     }
 }
 ```
@@ -231,7 +231,7 @@ Y ahora a configurar. Este plugin necesita saber qué ficheros _debe vigilar_, q
 ```javascript
 watch:
 {
-    files: ["index.html", "js/source/*", "css/**/*"],
+    files: ["index.html", "assets-src/**/*"],
     tasks: ['concat', 'uglify'],
     options: {
         spawn: false,
@@ -242,10 +242,10 @@ watch:
 Si nos vamos a la terminal y ponemos `grunt watch`, veremos que Grunt se queda esperando (_"Waiting..."_). Si vamos al editor y modificamos algunos de los ficheros vigilados, se ejecutarán automáticamente las tareas:
 
     Waiting...
-    >> File "js/source/functions.js" changed.
+    >> File "assets-src/js/functions.js" changed.
     
     Running "concat:files" (concat) task
-    File js/output/script.js created.
+    File assets/js/script.js created.
     
     Running "uglify:files" (uglify) task
     >> 1 file created.
@@ -295,8 +295,8 @@ Así, si queremos que los ficheros JavaScript generados tengan el nombre del pro
 ```javascript
 files:
 {
-    src: "js/output/script.js",
-    dest: "js/output/<%= pkg.name %>.script.min.js"
+    src: "assets/js/script.js",
+    dest: "assets/js/<%= pkg.name %>.script.min.js"
 }
 ```
 
@@ -324,8 +324,8 @@ uglify:
 
     files:
     {
-        src: "js/output/script.js",
-        dest: "js/output/script.min.js"
+        src: "assets/js/script.js",
+        dest: "assets/js/script.min.js"
     }
 },
 ```
