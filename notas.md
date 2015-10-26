@@ -10,7 +10,7 @@ En este taller vamos a presentar Grunt, veremos cómo se instala, cómo se confi
 
 Grunt está implementado en JavaScript, utilizando [Node.js](http://nodejs.org/) como entorno para ejecutarse. Por tanto, es imprescindible que esté instalado. La forma más sencilla de instalar Node en un sistema como Ubuntu es con los siguientes comandos:
 
-    curl -sL https://deb.nodesource.com/setup | sudo bash -
+    curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
     sudo apt-get install nodejs
 
 
