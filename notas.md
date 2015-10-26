@@ -18,7 +18,11 @@ Con esto ya tendremos disponibles tanto `node` como [npm](https://www.npmjs.com/
 
 # Proyecto de ejemplo
 
-Para ir aprendiendo a usar Grunt, vamos a aplicarlo a un proyecto de ejemplo. El ejemplo tiene la siguiente estructura:
+Para ir aprendiendo a usar Grunt, vamos a aplicarlo a un proyecto de ejemplo que descargaremos del repositorio del taller. Usaremos:
+
+    git clone git@github.com:JoseTomasTocino/grunt-workshop.git
+
+El proyecto de ejemplo está en la carpeta `empty` y tiene la siguiente estructura:
 
 - Un fichero web `index.html` con contenido de prueba.
 - Una carpeta `assets-src`, donde se encuentra el código fuente de los ficheros JavaScript y CSS originales.
@@ -28,11 +32,11 @@ Para ir aprendiendo a usar Grunt, vamos a aplicarlo a un proyecto de ejemplo. El
 
 Al comenzar cualquier proyecto lo primero que debemos hacer es crear un fichero llamado `package.json` ([más información sobre el fichero package.json](http://browsenpm.org/package.json)). Este fichero contiene información sobre vuestro proyecto, como el nombre, la versión, información sobre el desarrollador y la lista de dependencias, que se descargarán del repositorio de `npm`.
 
-Para empezar a crearlo, escribe:
+Para empezar a crearlo, nos vamos a la carpeta `empty` y escribimos:
 
     npm init
 
-Rellena los campos que te pide, puedes dejar la mayoría en blanco porque no son relevantes ni obligatorios. Al terminar, se generará el fichero. Puedes obtener más información sobre el fichero en:
+Rellena los campos que te pide, puedes dejar la mayoría en blanco porque por ahora no son relevantes ni obligatorios. Al terminar, se generará el fichero. Puedes obtener más información sobre el fichero en:
 
     npm help json
 
@@ -107,7 +111,9 @@ Hay un caso especial, el de la tarea por defecto, denominada *default*, que se e
 
 ## Paso 4: operaciones básicas
 
-Si nos vamos a la carpeta `js/source` veréis que tenemos dos ficheros JavaScript: `function.js` y `main.js`. El primero de ellos define varias funciones de utilidad, mientras que el segundo las utiliza. Además, en la carpeta `js/vendor` está la popular biblioteca **jQuery**. Sería interesante poder usar esos tres ficheros sin tener que cargarlos uno a uno en el HTML. Por ello, resultaría interesante **concatenarlos** en un solo archivo `script.js` en la carpeta `js/output`, tarea que podemos hacer utilizando el plugin **concat** de Grunt. Para instalarlo, escribimos:
+Si nos vamos a la carpeta `assets-src/js` veréis que tenemos dos ficheros JavaScript: `function.js` y `main.js`. El primero de ellos define varias funciones de utilidad, mientras que el segundo las utiliza. Además, en la carpeta `assets-src/js/vendor` está la popular biblioteca **jQuery**. 
+
+Sería interesante poder usar esos tres ficheros sin tener que cargarlos uno a uno en el HTML. Por ello, lo mejor es **concatenarlos** en un solo archivo `script.js` en la carpeta `assets/js`, tarea que podemos hacer utilizando el plugin **concat** de Grunt. Para instalarlo, escribimos:
 
     npm install grunt-contrib-concat --save-dev
 
