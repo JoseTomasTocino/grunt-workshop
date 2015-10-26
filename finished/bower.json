@@ -8,8 +8,8 @@
   },
   "install" : {
     "path" : {
-      "js": "js/vendor",
-      "css": "css/vendor"
+      "js": "assets-src/js/vendor",
+      "css": "assets-src/css/vendor"
     }
   }
 }

@@ -77,7 +77,7 @@ module.exports = function(grunt)
 };
 ```
 
-Su estructura es muy sencilla. El primer paso siempre será decidir **qué plugins** vamos a usar y cargarlos mediante las llamadas a `grunt.loadNpmTasks`. 
+Su estructura es muy sencilla. El primer paso siempre será decidir **qué plugins** vamos a usar, **instalarlos** y cargarlos mediante las llamadas a `grunt.loadNpmTasks`. 
 
 ```javascript
 grunt.loadNpmTasks('grunt-contrib-concat');
